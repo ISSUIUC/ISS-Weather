@@ -8,11 +8,12 @@ import os
 
 load_dotenv()
 
-ENDPOINT = os.getenv("GRIB_CONVERTER_ENDPOINT")       
+ENDPOINT = os.getenv("GRIB_CONVERTER_ENDPOINT")   
+PASS = os.getenv("GRIB_CONVERTER_PASSWORD")    
 
 def get_json_from_grib_url(in_grib_url):
     HDRS = {"Content-Type": "application/json"}
-    return requests.post(ENDPOINT, json={"uri": in_grib_url}, headers=HDRS).json()
+    return requests.post(ENDPOINT, json={"uri": in_grib_url, "pw": PASS}, headers=HDRS).json()
 
 def download_grib_to_jsonf(in_grib_url, filename):
     print("Sending remote request...")
